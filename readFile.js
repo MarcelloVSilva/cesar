@@ -8,9 +8,15 @@ var fs = require('fs'),
 fs.readFile(filePath, {encoding: 'utf-8'}, function(err,texto){
     if (!err) {
          var encryptedText = encrypt(texto);
-         var decryptedText = decrypt(encryptedText, 5);
          console.log(encryptedText);
-         console.log(decryptedText);
+
+         for(variacao=0; variacao<=20; variacao++) {
+           fs.writeFile(`./decryptedTextFiles/writtenFile${variacao}.txt`, decrypt(encryptedText, variacao), function(err) {
+             if(err) throw err;
+             console.log('Arquivo escrito com sucesso');
+           })
+         }
+
     } else {
         console.log(err);
     }
