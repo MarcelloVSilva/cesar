@@ -1,4 +1,4 @@
-var writeTextFile = require('./writeTextFile');
+var fs = require('fs');
 
 module.exports = function decrypt(texto, variacao) {
     var txtMinusculoDoArquivo = texto.toLowerCase();
@@ -16,6 +16,12 @@ module.exports = function decrypt(texto, variacao) {
         }
     else txtDescriptografado[i] = ' ';
     }
-    writeTextFile('./writtenFile.txt', txtDescriptografado.join(""));
+
+    // Criação e escrita de arquivo
+    fs.appendFile('./decryptedTextFiles/writtenFile.txt', txtDescriptografado.join(""), function (err) {
+      if (err) throw err;
+      console.log('Arquivo escrito com sucesso!');
+    });
+
     return(txtDescriptografado.join(""));
 }
