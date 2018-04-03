@@ -3,7 +3,6 @@ var fs = require('fs');
 module.exports = function decrypt(texto, variacao) {
     var txtMinusculoDoArquivo = texto.toLowerCase();
     var alfa = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    console.log(alfa);
     var txtDescriptografado = [];
 
     for (var i = 0; i < txtMinusculoDoArquivo.length; i++){

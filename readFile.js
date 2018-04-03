@@ -21,7 +21,6 @@ function writeMultipleFiles(encryptedText) {
     fs.writeFile(`./decryptedTextFiles/writtenFile${variation}.txt`, decrypt(encryptedText, variation), function(err) {
       if(err) throw err;
       console.log('Arquivo escrito com sucesso');
-      console.log(variation);
     })
   }
 }
