@@ -10,14 +10,18 @@ fs.readFile(filePath, {encoding: 'utf-8'}, function(err,texto){
          var encryptedText = encrypt(texto);
          console.log(encryptedText);
 
-         for(variacao=0; variacao<=20; variacao++) {
-           fs.writeFile(`./decryptedTextFiles/writtenFile${variacao}.txt`, decrypt(encryptedText, variacao), function(err) {
-             if(err) throw err;
-             console.log('Arquivo escrito com sucesso');
-           })
-         }
+         writeMultipleFiles(encryptedText);
 
     } else {
         console.log(err);
     }
 });
+
+function writeMultipleFiles(encryptedText) {
+  for(variation=0; variation<=26; variation++) {
+    fs.writeFile(`./decryptedTextFiles/writtenFile${variation}.txt`, decrypt(encryptedText, variation), function(err) {
+      if(err) throw err;
+      console.log('Arquivo escrito com sucesso');
+    })
+  }
+}
