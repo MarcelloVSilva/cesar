@@ -7,12 +7,12 @@ var fs = require('fs'),
 
 fs.readFile(filePath, {encoding: 'utf-8'}, function(err,texto){
     if (!err) {
-         var encryptedText = encrypt(texto);
-         console.log(encryptedText);
+     var encryptedText = encrypt(texto);
+     console.log(encryptedText);
 
-         writeMultipleFiles(encryptedText);
+     writeMultipleFiles(encryptedText);
     } else {
-        console.log(err);
+      console.log(err);
     }
 });
 
