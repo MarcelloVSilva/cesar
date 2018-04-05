@@ -1,5 +1,5 @@
 var encrypt = require('./encrypt');
-var decrypt = require('./decrypt');
+var decriptaArq = require('./decrypt');
 
 var fs = require('fs'),
     path = require('path'),
@@ -10,17 +10,8 @@ fs.readFile(filePath, {encoding: 'utf-8'}, function(err,texto){
      var encryptedText = encrypt(texto);
      console.log(encryptedText);
 
-     writeMultipleFiles(encryptedText);
+     decriptaArq(encryptedText);
     } else {
       console.log(err);
     }
 });
-
-function writeMultipleFiles(encryptedText) {
-  for(variation=0; variation<26; variation++) {
-    fs.writeFile(`./decryptedTextFiles/writtenFile${variation}.txt`, decrypt(encryptedText, variation), function(err) {
-      if(err) throw err;
-      console.log('Arquivo escrito com sucesso');
-    })
-  }
-}
