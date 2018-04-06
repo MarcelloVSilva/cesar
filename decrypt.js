@@ -9,15 +9,13 @@ function decrypt(texto) {
     var txtDescriptografadoPalavraPorPalavra = [];
     var acertos = 0;
     var porcentagemAcerto = 0;
-    console.log("")
-    console.log("txtMinusculoDoArquivo: ", txtMinusculoDoArquivo)
-    console.log("")
+    
 
     for(variation=0; variation<26; variation++) {
         acertos = 0;
         porcentagemAcerto = 0
         for (i = 0; i < txtMinusculoDoArquivo.length; i++){
-            if(txtMinusculoDoArquivo[i] != ' '){
+            if(/[a-z]/g.test(txtMinusculoDoArquivo[i])){
                 for (j = 0; j < alfa.length; j++){
                     if (txtMinusculoDoArquivo[i] == alfa[j]){
                         txtDescriptografado[i] = alfa[(j - variation) % alfa.length];
@@ -25,7 +23,7 @@ function decrypt(texto) {
                     }
                 }
             }
-        else txtDescriptografado[i] = ' ';
+        else txtDescriptografado[i] = txtMinusculoDoArquivo[i];
         }
         txtDescriptografadoPalavraPorPalavra = txtDescriptografado.join("").split(" ")
         txtDescriptografadoPalavraPorPalavra.forEach(function(e) {
