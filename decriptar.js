@@ -7,8 +7,8 @@ var fs = require('fs'),
 fs.readFile(filePath, {encoding: 'utf-8'}, function(err,texto){
     if (!err) {
         console.log("texto lido: ",texto);
-        
+
         var decriptografado = decriptaArq(texto);
-        console.log(decriptografado);
+        console.log("texto decriptografado: ",decriptografado);
     }
 });
