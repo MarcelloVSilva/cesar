@@ -10,7 +10,7 @@ function decryptAndSave(texto) {
     var todosOsTextos = [];
 
     var acertos = 0;
-
+    console.log("alfa.length", alfa.toString())
     var porcentagensAcerto = [];
 
     for(variation=0; variation<26; variation++) {
@@ -19,13 +19,13 @@ function decryptAndSave(texto) {
         for (i = 0; i < txtMinusculoDoArquivo.length; i++){
             if(/[a-z]/g.test(txtMinusculoDoArquivo[i])){
                 for (j = 0; j < alfa.length; j++){
-                    if (txtMinusculoDoArquivo[i] == alfa[j]){
-                        txtDescriptografado[i] = alfa[(j - variation) % alfa.length];
-                        break;
+                    if (txtMinusculoDoArquivo[i] === alfa[j]){
+                        txtDescriptografado[i] = alfa[(j + variation) % alfa.length];
+                        // break;
                     }
                 }
             }
-        else txtDescriptografado[i] = txtMinusculoDoArquivo[i];
+            else txtDescriptografado[i] = txtMinusculoDoArquivo[i];
         }
         txtDescriptografadoPalavraPorPalavra = txtDescriptografado.join("").split(" ")
         txtDescriptografadoPalavraPorPalavra.forEach(function(e) {
