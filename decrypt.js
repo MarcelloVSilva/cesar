@@ -1,17 +1,18 @@
 var fs = require('fs');
 var palavras = require('./DB');
 
-function decrypt(texto) {
+function decryptAndSave(texto) {
     var txtMinusculoDoArquivo = texto.toLowerCase();
     var banco = palavras().map(function(e){ return e.toLowerCase()});
     var alfa = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     var txtDescriptografado = [];
     var txtDescriptografadoPalavraPorPalavra = [];
+    var todosOsTextos = [];
+
     var acertos = 0;
     var porcentagemAcerto = 0;
-    console.log("")
-    console.log("txtMinusculoDoArquivo: ", txtMinusculoDoArquivo)
-    console.log("")
+
+    var porcentagensAcerto = [];
 
     for(variation=0; variation<26; variation++) {
         acertos = 0;
@@ -31,23 +32,26 @@ function decrypt(texto) {
         txtDescriptografadoPalavraPorPalavra.forEach(function(e) {
             banco.indexOf(e) > 0? acertos++ : null;
         })
-        
+
         porcentagemAcerto = acertos/txtDescriptografado.length * 100;
-        console.log("txtDescriptografado: ", txtDescriptografado.join(""))
-        // console.log("txtDescriptografado", txtDescriptografado.join("").split(" "))
-        console.log("variation", variation)
-        console.log("txtDescriptografado.length", txtDescriptografado.length)
-        console.log("acertos", acertos)
-        console.log("porcentagemAcerto", porcentagemAcerto)
-        console.log("")
+        porcentagensAcerto.push(porcentagemAcerto);
+
+        todosOsTextos.push(txtDescriptografado.join(""));
     }
 
-    // return(txtDescriptografado.join(""));
+    var indiceMaiorPorcentagem = porcentagensAcerto.indexOf(Math.max(...porcentagensAcerto));
+
+    fs.writeFile(`./decryptedTextFiles/textoDescriptografado.txt`, todosOsTextos[indiceMaiorPorcentagem], function(err) {
+        if(err) throw err;
+        console.log('Arquivo escrito com sucesso');
+    })
+
+    return todosOsTextos[indiceMaiorPorcentagem];
 }
 
 module.exports = function decriptaArq(encryptedText) {
-    var ehPraSalvarEsse = 0;
-    ehPraSalvarEsse = decrypt(encryptedText)
+    // var ehPraSalvarEsse = 0;
+    return ehPraSalvarEsse = decryptAndSave(encryptedText)
     // if(ehPraSalvarEsse)
     //     fs.writeFile(`./decryptedTextFiles/writtenFile${variation}.txt`, ehPraSalvarEsse, function(err) {
     //         if(err) throw err;
