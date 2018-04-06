@@ -7,8 +7,12 @@ function decrypt(texto) {
     var alfa = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     var txtDescriptografado = [];
     var txtDescriptografadoPalavraPorPalavra = [];
+    var txtDescriptografados = [];
+
     var acertos = 0;
     var porcentagemAcerto = 0;
+
+    var porcentagensAcerto = [];
     console.log("")
     console.log("txtMinusculoDoArquivo: ", txtMinusculoDoArquivo)
     console.log("")
@@ -31,9 +35,12 @@ function decrypt(texto) {
         txtDescriptografadoPalavraPorPalavra.forEach(function(e) {
             banco.indexOf(e) > 0? acertos++ : null;
         })
-        
+
         porcentagemAcerto = acertos/txtDescriptografado.length * 100;
+        porcentagensAcerto.push(porcentagemAcerto);
+
         console.log("txtDescriptografado: ", txtDescriptografado.join(""))
+        txtDescriptografados.push(txtDescriptografado);
         // console.log("txtDescriptografado", txtDescriptografado.join("").split(" "))
         console.log("variation", variation)
         console.log("txtDescriptografado.length", txtDescriptografado.length)
@@ -41,6 +48,14 @@ function decrypt(texto) {
         console.log("porcentagemAcerto", porcentagemAcerto)
         console.log("")
     }
+
+    var indiceMaiorPorcentagem = porcentagensAcerto.indexOf(Math.max(...porcentagensAcerto));
+    // return txtDescriptografados[indiceMaiorPorcentagem];
+
+    fs.writeFile(`./decryptedTextFiles/textoDescriptografado.txt`, txtDescriptografados[indiceMaiorPorcentagem], function(err) {
+        if(err) throw err;
+        console.log('Arquivo escrito com sucesso');
+    })
 
     // return(txtDescriptografado.join(""));
 }
