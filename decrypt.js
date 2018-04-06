@@ -4,13 +4,13 @@ var palavras = require('./DB');
 function decrypt(texto) {
     var txtMinusculoDoArquivo = texto.toLowerCase();
     var banco = palavras().map(function(e){ return e.toLowerCase()});
-    var alfa = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    var alfa = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','w','z'];
     var txtDescriptografado = [];
     var txtDescriptografadoPalavraPorPalavra = [];
     var acertos = 0;
     var porcentagemAcerto = 0;
 
-    for(variation=0; variation<27; variation++) {
+    for(variation=0; variation<26; variation++) {
         acertos = 0;
         porcentagemAcerto = 0
         for (i = 0; i < txtMinusculoDoArquivo.length; i++){
